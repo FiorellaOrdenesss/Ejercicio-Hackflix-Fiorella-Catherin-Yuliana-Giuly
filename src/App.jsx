@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./App.css";
+import Peliculas from "./components/Peliculas";
 
 function App() {
   return (
-    <>
-      <div>
-        <p>Hola</p>
-      </div>
-    </>
+    <div>
+      <h1>Hackflix 🎬</h1>
+      <Peliculas />
+    </div>
   );
 }
 
