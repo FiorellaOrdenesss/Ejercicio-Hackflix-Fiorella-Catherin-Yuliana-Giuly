@@ -14,7 +14,12 @@ const Peliculas = () => {
     <div className="peliculas-container">
       {peliculas.map((peli) => (
         <div key={peli.id} className="pelicula-card">
-          <img src={peli.poster} alt={peli.title} className="pelicula-img" />
+          <img
+            src={peli.poster_path}
+            alt={peli.title}
+            className="pelicula-img"
+          />
+
           <h3>{peli.title}</h3>
         </div>
       ))}
