@@ -1,28 +1,39 @@
 // src/components/Peliculas.jsx
-import React, { useEffect, useState } from "react";
-import "./Peliculas.css";
+import React, { useState } from "react";
+import ModalPelicula from "./ModalPelicula";
 import peliculasData from "../assets/movies.json";
+import "./Peliculas.css";
 
 const Peliculas = () => {
-  const [peliculas, setPeliculas] = useState([]);
+  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
 
-  useEffect(() => {
-    setPeliculas(peliculasData);
-  }, []);
+  const abrirModal = (pelicula) => {
+    setPeliculaSeleccionada(pelicula);
+  };
+
+  const cerrarModal = () => {
+    setPeliculaSeleccionada(null);
+  };
 
   return (
     <div className="peliculas-container">
-      {peliculas.map((peli) => (
-        <div key={peli.id} className="pelicula-card">
+      {peliculasData.map((pelicula) => (
+        <div
+          key={pelicula.id}
+          className="pelicula-card"
+          onClick={() => abrirModal(pelicula)}
+        >
           <img
-            src={peli.poster_path}
-            alt={peli.title}
+            src={pelicula.poster_path}
+            alt={pelicula.title}
             className="pelicula-img"
           />
-
-          <h3>{peli.title}</h3>
         </div>
       ))}
+
+      {peliculaSeleccionada && (
+        <ModalPelicula pelicula={peliculaSeleccionada} onClose={cerrarModal} />
+      )}
     </div>
   );
 };

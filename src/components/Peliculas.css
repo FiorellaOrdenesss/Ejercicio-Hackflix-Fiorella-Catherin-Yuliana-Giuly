@@ -13,7 +13,7 @@
 .pelicula-img {
   width: 200px;
   height: auto;
-  border-radius: 8px;
+  border-radius: 3px;
   transition: transform 0.3s ease;
 }
 
