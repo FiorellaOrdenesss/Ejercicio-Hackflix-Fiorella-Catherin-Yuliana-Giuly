@@ -1,0 +1,22 @@
+.peliculas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.pelicula-card {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.pelicula-img {
+  width: 200px;
+  height: auto;
+  border-radius: 3px;
+  transition: transform 0.3s ease;
+}
+
+.pelicula-img:hover {
+  transform: scale(1.1);
+}
