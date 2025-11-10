@@ -1,22 +1,49 @@
+/* src/components/Peliculas.css */
 .peliculas-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columnas en desktop */
   gap: 20px;
-  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
 }
 
 .pelicula-card {
-  text-align: center;
+  cursor: pointer;
   transition: transform 0.3s ease;
+}
+
+.pelicula-card:hover {
+  transform: scale(1.05);
 }
 
 .pelicula-img {
-  width: 200px;
-  height: auto;
-  border-radius: 3px;
-  transition: transform 0.3s ease;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.pelicula-img:hover {
-  transform: scale(1.1);
+.loader {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 20px;
+}
+
+/* 4 columnas en pantallas pequeñas */
+@media (max-width: 768px) {
+  .peliculas-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+}
+
+/* 2 columnas en pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .peliculas-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
 }

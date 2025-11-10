@@ -22,9 +22,6 @@ const ModalPelicula = ({ pelicula, onClose }) => {
             <strong>Calificación:</strong> {vote_average} / 10
           </p>
         </div>
-        <button className="modal-close" onClick={onClose}>
-          Cerrar
-        </button>
       </div>
     </div>
   );

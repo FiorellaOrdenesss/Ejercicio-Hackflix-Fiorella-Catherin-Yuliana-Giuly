@@ -1,3 +1,4 @@
+/* src/components/ModalPelicula.css */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -13,35 +14,36 @@
 
 .modal-content {
   background-color: #fff;
-  padding: 20px;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
   width: 90%;
-  max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .modal-title {
-  margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
-.modal-divider {
-  margin: 10px 0;
-  border: none;
-  border-top: 1px solid #ccc;
-}
-
-.modal-info p {
-  margin: 8px 0;
+.modal-description {
   font-size: 1rem;
+  color: #666;
 }
 
-.modal-close {
-  margin-top: 15px;
-  padding: 8px 16px;
-  background-color: #444;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+/*  Estilos responsivos para el modal */
+@media (max-width: 500px) {
+  .modal-content {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .modal-description {
+    font-size: 0.95rem;
+  }
 }

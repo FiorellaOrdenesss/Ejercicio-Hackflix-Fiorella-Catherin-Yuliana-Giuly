@@ -1,20 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MovieNavbar from "./components/Navbar";
-import Banner from "./components/Banner";
+// src/App.jsx
 import Peliculas from "./components/Peliculas";
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <div className="App">
-        <MovieNavbar />
-        <Banner />
-        <Routes>
-          <Route path="/" element={<Peliculas />} />
-        </Routes>
-      </div>
-    </Router>
+    <div>
+      <h1 style={styles.titulo}>Hackflix 🎬</h1>
+      <Peliculas />
+    </div>
   );
-}
+};
+
+const styles = {
+  titulo: {
+    textAlign: "center",
+    fontSize: "2.5rem",
+    margin: "20px 0",
+    color: "#333",
+  },
+};
 
 export default App;
