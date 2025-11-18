@@ -1,28 +1,35 @@
 // src/components/Peliculas.jsx
-import { useState, useEffect } from "react";
-import ModalPelicula from "./ModalPelicula";
+import { useState, useEffect, useRef } from "react";
+import HomeCard from "./HomeCard";
 import "./Peliculas.css";
+
+const API_KEY = "dfc76cd6e2e40143dcdc6ab4ee6bb34d";
 
 const Peliculas = () => {
   const [peliculas, setPeliculas] = useState([]);
   const [pagina, setPagina] = useState(1);
   const [cargando, setCargando] = useState(false);
-  const [peliculaSeleccionada, setPeliculaSeleccionada] = useState(null);
+  const [error, setError] = useState(null);
 
-  const API_KEY = "dfc76cd6e2e40143dcdc6ab4ee6bb34d";
-  const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${pagina}`;
+  const sentinelRef = useRef(null);
 
   const obtenerPeliculas = async () => {
     if (cargando) return;
     setCargando(true);
 
     try {
-      const respuesta = await fetch(API_URL);
-      const datos = await respuesta.json();
-      setPeliculas((prevPeliculas) => [...prevPeliculas, ...datos.results]);
-      setPagina((prevPagina) => prevPagina + 1);
-    } catch (error) {
-      console.error("Error al cargar películas:", error);
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${pagina}`
+      );
+      const data = await res.json();
+      const results = Array.isArray(data.results) ? data.results : [];
+
+      setPeliculas((prev) => [...prev, ...results]);
+      setPagina((prev) => prev + 1);
+      setError(null);
+    } catch (err) {
+      console.error("Error al cargar películas:", err);
+      setError("No se pudieron cargar más películas");
     } finally {
       setCargando(false);
     }
@@ -33,47 +40,35 @@ const Peliculas = () => {
   }, []);
 
   useEffect(() => {
-    const manejarScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 100 &&
-        !cargando
-      ) {
-        obtenerPeliculas();
-      }
-    };
+    const el = sentinelRef.current;
+    if (!el) return;
 
-    window.addEventListener("scroll", manejarScroll);
-    return () => window.removeEventListener("scroll", manejarScroll);
-  }, [cargando]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !cargando && !error) {
+          obtenerPeliculas();
+        }
+      },
+      { rootMargin: "200px" }
+    );
 
-  const abrirModal = (pelicula) => {
-    setPeliculaSeleccionada(pelicula);
-  };
-
-  const cerrarModal = () => {
-    setPeliculaSeleccionada(null);
-  };
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [cargando, error, pagina]);
 
   return (
-    <div className="peliculas-container">
-      {peliculas.map((pelicula) => (
-        <div
-          key={pelicula.id}
-          className="pelicula-card"
-          onClick={() => abrirModal(pelicula)}
-        >
-          <img
-            src={`https://image.tmdb.org/t/p/w500${pelicula.poster_path}`}
-            alt={pelicula.title}
-            className="pelicula-img"
-          />
-        </div>
-      ))}
+    <div>
+      {error && <p style={{ padding: "0 20px" }}>{error}</p>}
 
-      {peliculaSeleccionada && (
-        <ModalPelicula pelicula={peliculaSeleccionada} onClose={cerrarModal} />
-      )}
+      <div className="peliculas-container">
+        {peliculas.length > 0
+          ? peliculas.map((pelicula) => (
+              <HomeCard key={pelicula.id} pelicula={pelicula} />
+            ))
+          : !cargando &&
+            !error && <p>No se encontraron películas para mostrar</p>}
+        <div ref={sentinelRef} style={{ height: 1 }} />
+      </div>
 
       {cargando && <p className="loader">Cargando más películas...</p>}
     </div>

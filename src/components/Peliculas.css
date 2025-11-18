@@ -1,25 +1,28 @@
-/* src/components/Peliculas.css */
+/* Desktop: 5 columnas fijas */
 .peliculas-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columnas en desktop */
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   padding: 20px;
   background-color: #f5f5f5;
 }
 
-.pelicula-card {
-  cursor: pointer;
-  transition: transform 0.3s ease;
+/* Tablet: 3 columnas */
+@media (max-width: 1024px) {
+  .peliculas-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
 }
 
-.pelicula-card:hover {
-  transform: scale(1.05);
-}
-
-.pelicula-img {
-  width: 100%;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+/* Móvil: 2 columnas */
+@media (max-width: 600px) {
+  .peliculas-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
+  }
 }
 
 .loader {
@@ -28,22 +31,4 @@
   font-size: 1.2rem;
   color: #555;
   margin-top: 20px;
-}
-
-/* 4 columnas en pantallas pequeñas */
-@media (max-width: 768px) {
-  .peliculas-container {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    padding: 15px;
-  }
-}
-
-/* 2 columnas en pantallas muy pequeñas */
-@media (max-width: 480px) {
-  .peliculas-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 10px;
-  }
 }

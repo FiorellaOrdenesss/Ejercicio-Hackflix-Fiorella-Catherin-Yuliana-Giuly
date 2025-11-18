@@ -1,0 +1,21 @@
+/* src/components/HomeCard.css */
+.home-card {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* mantiene proporción tipo póster, dejalo en dos, en tres se ve horrible y en uno peor */
+  cursor: pointer; /* Dudoso, queda bien el cursor tipo mano, pero ns */
+  transition: transform 0.3s ease;
+  border-radius: 3px;
+  overflow: hidden; /* para que no se salga la imagen */
+}
+
+.home-card:hover {
+  transform: scale(1.05);
+} /* Efecto de zoom al pasar el ratón */
+
+.home-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* toma todo el contenedor, queda bien, no sacar*/
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidad */
+}
