@@ -1,4 +1,5 @@
 // src/components/Peliculas.jsx
+// Fiorella Ordenes, Catherine Rojas, Yuliana Nuñes y Giuliana Poggio
 import { useState, useEffect, useRef } from "react";
 import HomeCard from "./HomeCard";
 import "./Peliculas.css";
@@ -59,14 +60,12 @@ const Peliculas = () => {
     return () => observer.disconnect();
   }, [cargando, error, pagina]);
 
-  // ⭐ funciona siempre
   const handleRating = (value) => {
-    const tmdbRating = value * 2; // 1 estrella = 2 en TMDB
+    const tmdbRating = value * 2;
     console.log("Nuevo rating mínimo:", tmdbRating);
     setRatingMinimo(tmdbRating);
   };
 
-  // ⭐ siempre filtra antes de mostrar
   const peliculasFiltradas = peliculas.filter((p) => {
     if (!ratingMinimo) return true;
     return p.vote_average >= ratingMinimo;
@@ -74,18 +73,16 @@ const Peliculas = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      {/* FILTRO */}
       <div className="rating-filter">
-        <span>Filtrar por rating: </span>
+        <span className="rating-label">Filtrar por rating: </span>
         <Rating
           onClick={handleRating}
           initialValue={ratingMinimo / 2}
           size={25}
         />
-        {ratingMinimo > 0 && <span>&nbsp; & Más</span>}
+        {ratingMinimo > 0 && <span className="rating-label">&nbsp; & Más</span>}
       </div>
 
-      {/* LISTADO */}
       <div className="peliculas-container">
         {peliculasFiltradas.map((pelicula) => (
           <HomeCard key={pelicula.id} pelicula={pelicula} />

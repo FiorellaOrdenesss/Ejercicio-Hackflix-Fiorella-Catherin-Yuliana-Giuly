@@ -1,5 +1,5 @@
-import React from "react";
-
+// src/components/Movielist.jsx//
+// Fiorella Ordenes, Catherine Rojas, Yuliana Nuñes y Giuliana Poggio//
 function MovieList({ movies }) {
   return (
     <div

@@ -1,0 +1,21 @@
+/* src/components/Home.css */
+/* Fiorella Ordenes, Catherine Rojas, Yuliana Nuñes y Giuliana Poggio*/
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.home-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  margin-top: 60px;
+}
+
+.home-content {
+  padding: 20px;
+  background-color: #111;
+}

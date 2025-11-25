@@ -1,4 +1,5 @@
 // src/components/NotFound.jsx
+// Fiorella Ordenes, Catherine Rojas, Yuliana Nuñes y Giuliana Poggio
 const NotFound = () => {
   return (
     <div

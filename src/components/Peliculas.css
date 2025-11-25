@@ -1,11 +1,5 @@
 /* src/components/Peliculas.css */
-
-.filtro-rating {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
-  padding-top: 10px;
-}
+/* Fiorella Ordenes, Catherine Rojas, Yuliana Nuñes y Giuliana Poggio*/
 
 .rating-filter {
   text-align: center;
@@ -18,8 +12,9 @@
 }
 
 .rating-label {
+  color: white;
   font-size: 16px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .peliculas-container {
@@ -31,4 +26,11 @@
 .loader {
   text-align: center;
   padding: 15px;
+  color: white;
+}
+
+.error {
+  text-align: center;
+  padding: 15px;
+  color: #e50914;
 }

@@ -1,4 +1,5 @@
 // src/components/HomeCard.jsx
+// Fiorella Ordenes, Catherine Rojas, Yuliana Nuñes y Giuliana Poggio//
 import { useNavigate, useLocation } from "react-router-dom";
 import "./HomeCard.css";
 

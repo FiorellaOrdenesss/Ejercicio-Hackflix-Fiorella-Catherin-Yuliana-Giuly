@@ -1,9 +1,9 @@
 // src/components/RatingFilter.jsx
+// Fiorella Ordenes, Catherine Rojas, Yuliana Nuñes y Giuliana Poggio
 import { Rating } from "react-simple-star-rating";
 
 const RatingFilter = ({ onRatingChange }) => {
   const handleRating = (value) => {
-    // value llega de 0 a 100 → lo pasamos a 0–5 estrellas
     const estrellas = value / 20;
     onRatingChange(estrellas);
   };
