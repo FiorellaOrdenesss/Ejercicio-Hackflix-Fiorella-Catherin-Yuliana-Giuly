@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import HomeCard from "./HomeCard";
 import "./Peliculas.css";
+import { Rating } from "react-simple-star-rating";
 
 const API_KEY = "dfc76cd6e2e40143dcdc6ab4ee6bb34d";
 
@@ -10,6 +11,8 @@ const Peliculas = () => {
   const [pagina, setPagina] = useState(1);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
+
+  const [ratingMinimo, setRatingMinimo] = useState(0);
 
   const sentinelRef = useRef(null);
 
@@ -56,21 +59,42 @@ const Peliculas = () => {
     return () => observer.disconnect();
   }, [cargando, error, pagina]);
 
-  return (
-    <div>
-      {error && <p style={{ padding: "0 20px" }}>{error}</p>}
+  // ⭐ funciona siempre
+  const handleRating = (value) => {
+    const tmdbRating = value * 2; // 1 estrella = 2 en TMDB
+    console.log("Nuevo rating mínimo:", tmdbRating);
+    setRatingMinimo(tmdbRating);
+  };
 
+  // ⭐ siempre filtra antes de mostrar
+  const peliculasFiltradas = peliculas.filter((p) => {
+    if (!ratingMinimo) return true;
+    return p.vote_average >= ratingMinimo;
+  });
+
+  return (
+    <div style={{ padding: "20px" }}>
+      {/* FILTRO */}
+      <div className="rating-filter">
+        <span>Filtrar por rating: </span>
+        <Rating
+          onClick={handleRating}
+          initialValue={ratingMinimo / 2}
+          size={25}
+        />
+        {ratingMinimo > 0 && <span>&nbsp; & Más</span>}
+      </div>
+
+      {/* LISTADO */}
       <div className="peliculas-container">
-        {peliculas.length > 0
-          ? peliculas.map((pelicula) => (
-              <HomeCard key={pelicula.id} pelicula={pelicula} />
-            ))
-          : !cargando &&
-            !error && <p>No se encontraron películas para mostrar</p>}
+        {peliculasFiltradas.map((pelicula) => (
+          <HomeCard key={pelicula.id} pelicula={pelicula} />
+        ))}
         <div ref={sentinelRef} style={{ height: 1 }} />
       </div>
 
       {cargando && <p className="loader">Cargando más películas...</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 };

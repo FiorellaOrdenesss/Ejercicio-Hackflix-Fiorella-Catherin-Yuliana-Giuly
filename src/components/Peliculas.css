@@ -1,34 +1,34 @@
-/* Desktop: 5 columnas fijas */
+/* src/components/Peliculas.css */
+
+.filtro-rating {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 10px;
+}
+
+.rating-filter {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.rating-label {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
 .peliculas-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
-/* Tablet: 3 columnas */
-@media (max-width: 1024px) {
-  .peliculas-container {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    padding: 16px;
-  }
-}
-
-/* Móvil: 2 columnas */
-@media (max-width: 600px) {
-  .peliculas-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 12px;
-  }
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
 }
 
 .loader {
-  grid-column: 1 / -1;
   text-align: center;
-  font-size: 1.2rem;
-  color: #555;
-  margin-top: 20px;
+  padding: 15px;
 }

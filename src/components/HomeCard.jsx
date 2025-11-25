@@ -1,3 +1,4 @@
+// src/components/HomeCard.jsx
 import { useNavigate, useLocation } from "react-router-dom";
 import "./HomeCard.css";
 
